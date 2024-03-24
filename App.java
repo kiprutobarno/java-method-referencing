@@ -4,14 +4,20 @@ import java.util.List;
 import interfaces.Consumer;
 import interfaces.Function;
 import models.Book;
+import utils.BookDB;
 
 public class App {
     public static void main(String[] args) {
 
+        List<Book> books = BookDB.getAllBooks();
+        books.sort(App::compareBooksByRating);
+        var mappedBooks = map(books, (Book b) -> b.getTitle() + " -> " + b.getRating());
+        forEach(mappedBooks, (b) -> System.out.println(b));
+
     }
 
     public static int compareBooksByRating(Book a, Book b) {
-        return a.getRating().compareTo(b.getRating());
+        return b.getRating().compareTo(a.getRating());
     }
 
     public static <T, R> List<R> map(List<T> list, Function<T, R> f) {
