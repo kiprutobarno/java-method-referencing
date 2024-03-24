@@ -12,7 +12,7 @@ public class App {
         List<Book> books = BookDB.getAllBooks();
         books.sort(App::compareBooksByRating);
         var mappedBooks = map(books, (Book b) -> b.getTitle() + " -> " + b.getRating());
-        forEach(mappedBooks, (b) -> System.out.println(b));
+        forEach(mappedBooks, System.out::println);
 
     }
 
